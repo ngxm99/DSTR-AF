@@ -5,6 +5,15 @@
 
 using namespace std;
 
+struct Patient{
+    string patientID;
+    int age;
+    string careType;
+    int lengthOfStay;
+    double baseCostPerHour;
+    int daysVisitsPerYear;
+};
+
 int main(){
     ifstream file("datasets/facility_a.csv");
 
@@ -25,28 +34,32 @@ int main(){
     // Put the whole row into stringstream
     stringstream ss(line);
 
-    string patientID;
+    Patient patient;
+
     string age;
-    string careType;
     string lengthOfStay;
     string baseCostPerHour;
     string daysVisitsPerYear;
 
     // Split at every comma
-    getline(ss, patientID, ',');
+    getline(ss, patient.patientID, ',');
     getline(ss, age, ',');
-    getline(ss, careType, ',');
+    getline(ss, patient.careType, ',');
     getline(ss, lengthOfStay, ',');
     getline(ss, baseCostPerHour, ',');
     getline(ss, daysVisitsPerYear, ',');
 
-    cout << "Patient ID: " << patientID << endl;
-    cout << "Age: " << age << endl;
-    cout << "Care Type: " << careType << endl;
-    cout << "Length of Stay: " << lengthOfStay << endl;
-    cout << "Base Cost Per Hour: " << baseCostPerHour << endl;
-    cout << "Days Visits Per Year: " << daysVisitsPerYear << endl;
+    patient.age = stoi(age);
+    patient.lengthOfStay = stoi(lengthOfStay);
+    patient.baseCostPerHour = stod(baseCostPerHour);
+    patient.daysVisitsPerYear = stoi(daysVisitsPerYear);
 
+    cout << "Patient ID: " << patient.patientID << endl;
+    cout << "Age: " << patient.age << endl;
+    cout << "Care Type: " << patient.careType << endl;
+    cout << "Length of Stay: " << patient.lengthOfStay << endl;
+    cout << "Base Cost Per Hour: " << patient.baseCostPerHour << endl;
+    cout << "Days Visits Per Year: " << patient.daysVisitsPerYear << endl;
     file.close();
 
     return 0;
